@@ -73,8 +73,8 @@ nnoremap \tl :set invlist list?<CR>
 nmap <F7> \tl
 
 " F1: set mouse=a
-map <F2> :set mouse=a nopaste<CR>
-map <F3> :set mouse=r paste<CR>
+map <F2> :set mouse=a nopaste nu<CR>
+map <F3> :set mouse=r paste nu!<CR>
 
 "highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 "match OverLength /\%101v.\+/
