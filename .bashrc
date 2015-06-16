@@ -14,8 +14,9 @@ alias gr="~/git/scratch/gr"
 alias grep="grep --color"
 alias ff="find -type f | sort"
 alias fd="find -type d | sort"
-alias fn="find . -name" 
+alias fn="find . -name"
 alias la="ls -lath"
+alias ll="ls -a | sort | ls -lath"
 
 # git
 alias gs="git status"
@@ -26,6 +27,7 @@ alias gba="git branch -a"
 alias gk="gitk --all &"
 alias gl="git log"
 alias gcp="git cherry-pick"
+alias gd="git diff"
 
 # Current git branch or nothing.
 function br {
@@ -40,7 +42,7 @@ function _prompt_suffix {
 
 function _shortpath {
   #   How many characters of the $PWD should be kept
-  local pwd_length=30
+  local pwd_length=50
   local canonical=`pwd -P`
   local lpwd="${canonical/#$HOME/~}"
   if [ $(echo -n $lpwd | wc -c | tr -d " ") -gt $pwd_length ]
@@ -54,7 +56,7 @@ function _shortpath {
 function _git_branch_ps1 {
   local branch_name=`br`
   if [ -n "$branch_name" ]; then
-    echo "($branch_name)"
+    echo " $branch_name"
   else
     return  # Not a git repo.
   fi
@@ -67,9 +69,11 @@ WHITE="0;37m\]"
 YELLOW="0;33m\]"
 GREEN="0;32m\]"
 RED="0;31m\]"
+BOLD_GREY="1;33m\]"
+BOLD_ORANGE="1;31m\]"
+BLUE="0;34m\]"
 START="\[\e["
 STOP="\[\e[m\]"
 PROMPT_COMMAND='RET=$?;'
-RET_VALUE='$(echo $RET)'
-# export PROMPT_COMMAND='PS1="\`if [[ \$? = "0" ]]; then echo "\\[\\033[32m\\]"; else echo "\\[\\033[31m\\]"; fi\`[\!] $START$YELLOW\u@\h:$STOP $START$WHITE\$(shortpath)$STOP$START$RED\$(parse_git_branch)$STOP $(prompt_suffix)"'
-export PROMPT_COMMAND='PS1="$START$WHITE\$(_shortpath)$STOP$START$RED\$(_git_branch_ps1)$STOP $START$YELLOW$(_prompt_suffix)$STOP"'
+STATUS="\$(__a=\$?;if ((\$__a)); then echo -n \$__a && echo -n ' '; fi)"
+export PROMPT_COMMAND='PS1="$START$RED$STATUS$STOP\u@\h $START$WHITE\w$STOP\$(_git_branch_ps1) $START$BLUE$(_prompt_suffix)$STOP"'
