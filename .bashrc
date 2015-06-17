@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#### Local configuration
+
+if [ ~/.localrc ]; then
+  . ~/.localrc
+fi
+
 #### Aliases
 
 # apps
@@ -16,7 +22,7 @@ alias ff="find -type f | sort"
 alias fd="find -type d | sort"
 alias fn="find . -name"
 alias la="ls -lath"
-alias ll="ls -a | sort | ls -lath"
+alias ll="ls -a | sort | ls -lath --color=auto"
 
 # git
 alias gs="git status"
