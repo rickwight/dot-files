@@ -9,7 +9,7 @@ fi
 #### Aliases
 
 # apps
-alias go=xdg-open
+alias go="xdg-open 2>/dev/null"
 alias vi=vim
 alias rd="rdesktop -g 800x600"
 
@@ -21,7 +21,8 @@ alias grep="grep --color"
 alias ff="find -type f | sort"
 alias fd="find -type d | sort"
 alias fn="find . -name"
-alias la="ls -lath"
+alias ls="ls --color=auto"
+alias la="ls -lath --color=auto"
 alias ll="ls -a | sort | ls -lath --color=auto"
 
 # git
@@ -34,9 +35,10 @@ alias gk="gitk --all &"
 alias gl="git log"
 alias gcp="git cherry-pick"
 alias gd="git diff"
+alias gf="git diff-tree --no-commit-id --name-only -r"
 
 # Current git branch or nothing.
-function br {
+function git_branch {
   local ref=$(git symbolic-ref HEAD 2> /dev/null) || return
   echo "${ref#refs/heads/}"
 }
@@ -60,7 +62,7 @@ function _shortpath {
 
 # Display current branch in PS1.
 function _git_branch_ps1 {
-  local branch_name=`br`
+  local branch_name=`git_branch`
   if [ -n "$branch_name" ]; then
     echo " $branch_name"
   else
