@@ -23,7 +23,7 @@ alias fd="find -type d | sort"
 alias fn="find . -name"
 alias ls="ls --color=auto"
 alias la="ls -lath --color=auto"
-alias ll="ls -a | sort | ls -lath --color=auto"
+alias ll="ls -lah --color=auto"
 
 # git
 alias gs="git status"
@@ -45,7 +45,7 @@ function git_branch {
 
 # What to display as prompt suffix in Bash. Most sensibly represented as '$'.
 function _prompt_suffix {
-  echo '$ '
+  echo '$'
 }
 
 function _shortpath {
@@ -84,4 +84,4 @@ START="\[\e["
 STOP="\[\e[m\]"
 PROMPT_COMMAND='RET=$?;'
 STATUS="\$(__a=\$?;if ((\$__a)); then echo -n \$__a && echo -n ' '; fi)"
-export PROMPT_COMMAND='PS1="$START$RED$STATUS$STOP\u@\h $START$WHITE\w$STOP\$(_git_branch_ps1) $START$BLUE$(_prompt_suffix)$STOP"'
+export PROMPT_COMMAND='PS1="$START$RED$STATUS$STOP\u@\h $START$WHITE\w$STOP\$(_git_branch_ps1) $START$BLUE$(_prompt_suffix)$STOP "'
