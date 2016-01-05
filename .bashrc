@@ -37,6 +37,22 @@ alias gcp="git cherry-pick"
 alias gd="git diff"
 alias gf="git diff-tree --no-commit-id --name-only -r"
 
+# Set terminal title
+function set_term_title {
+  dir=$1
+  dir=${dir: -20}
+  echo -en "\033]2;$dir\007"
+}
+
+# Over cd to set terminal title
+function cd {
+  dir=$1
+  if [ -z "$dir" ]
+    then dir=~
+  fi
+  builtin cd "$dir" && set_term_title `pwd`
+}
+
 # Current git branch or nothing.
 function git_branch {
   local ref=$(git symbolic-ref HEAD 2> /dev/null) || return
