@@ -50,6 +50,7 @@ highlight link perlKeyWords Special
 highlight ExtraWhitespace guibg=red ctermbg=red
 match ExtraWhitespace /\s\+$/
 
+let &titleold=getcwd()[-20:]
 
 "au BufEnter *.c setl noexpandtab softtabstop=4
 "au BufEnter *.rb setl expandtab softtabstop=2
