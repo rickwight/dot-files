@@ -40,7 +40,10 @@ alias gf="git diff-tree --no-commit-id --name-only -r"
 # Set terminal title
 function set_term_title {
   dir=$1
-  dir=${dir: -20}
+  len=${#dir}
+  if [ "$len" -gt "20" ]
+    then dir=${dir: -20}
+  fi
   echo -en "\033]2;$dir\007"
 }
 
